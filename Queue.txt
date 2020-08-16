@@ -1,0 +1,174 @@
+#include <iostream>
+#define MAX 100
+
+using namespace std;
+
+class C_QUEUE {
+protected:
+   int front;
+   int rear;
+   int data[MAX];
+public:
+   C_QUEUE() { front = rear = 0; }
+   bool isEmpty() { return front == rear; }
+   bool isFull() { return (rear + 1) % MAX == front; }
+
+   void enqueue(int a) {
+      if (isFull())
+         cout << "큐가 포화다." << endl;
+      else {
+         rear = (rear + 1) % MAX;
+         data[rear] = a;
+      }
+   }
+
+   int dequeue() {
+      if (isEmpty())
+         cout << "큐는 비어있다." << endl;
+      else {
+         front = (front + 1) % MAX;
+         return data[front];
+      }
+   }
+
+   void display() {
+      cout << "큐 내용: " << endl;
+      int max = (front < rear) ? rear : rear + MAX;
+      for (int i = front + 1; i <= max; i++) {
+         cout << data[i % MAX] << endl;
+      }
+   }
+};
+
+class C_DEQUE: public C_QUEUE {
+public:
+   C_DEQUE() { };
+   void addRear(int a) { enqueue(a); }
+   int deleteFront() { return dequeue(); }
+
+   void addFront(int a) {
+      if (isFull())
+         cout << "덱이 포화입니다." << endl;
+
+      else {
+         data[front] = a;
+         front = (front - 1 + MAX) % MAX;
+      }
+   }
+   int deleteRear() {
+      if (isEmpty()) {
+         cout << "덱이 공백입니다." << endl;
+      }
+      else {
+         int ret = data[rear];
+         rear = (rear - 1 + MAX) % MAX;
+         return ret;
+      }
+   }
+   void display() {
+      cout << "덱의 내용: " << endl;
+      int max = (front < rear) ? rear : rear + MAX;
+      for (int i = front + 1; i <= max; i++) {
+         cout << data[i % MAX] << endl;
+      }
+   }
+};
+
+int main() {
+
+   //C_QUEUE q;
+   //q.enqueue(5);
+   //q.enqueue(3);
+   //q.enqueue(4);
+   //q.dequeue();
+   //q.display();
+
+   C_DEQUE d;
+   d.addFront(5);
+   d.addFront(3);
+   d.addFront(2);
+   d.addFront(1);
+   d.addFront(4);
+   d.addRear(10);
+   d.addRear(9);
+   d.addRear(7);
+   d.addRear(8);
+   d.addRear(6);
+   d.display();
+   d.deleteFront();
+   d.deleteRear();
+   d.display();
+}
+
+
+
+
+
+
+#파이썬
+MAX_QSIZE=10
+
+class CircularQueue:
+    def __init__(self):
+        self.front=0
+        self.rear=0
+        self.items=[None]*MAX_QSIZE
+
+    def isEmpty(self):return self.front==self.rear
+    def isFull(self): return self.front==(self.rear+1)%MAX_QSIZE
+    def clear(self): self.front=self.rear
+
+    def enqueue(self,item):
+        if not self.isFull():
+            self.rear=(self.rear+1)%MAX_QSIZE
+            self.items[self.rear]=item
+    def dequeue(self):
+        if not self.isEmpty():
+            self.front=(self.front+1)%MAX_QSIZE
+            return self.items[self.front]
+
+    def size(self):
+        return (self.rear-self.front+MAX_QSIZE)%MAX_QSIZE
+
+    def display(self):
+        out=[]
+        if self.front<self.rear:
+            out=self.items[self.front+1:self.rear+1]
+        else:
+            out=self.items[self.front+1:MAX_QSIZE]+self.items[0:self.rear+1]
+        print("front=%s, rear=%d"%(self.front,self.rear),out)
+
+
+q=CircularQueue()
+
+for i in range(8):q.enqueue(i)
+q.display()
+for i in range(5):q.dequeue()
+q.display()
+for i in range(8,14):q.enqueue(i)
+q.display()
+
+
+
+
+
+import queue #큐와 스택 클래스
+
+#S=queue.LifoQueue(maxsize=20) 이건 스택 객체 생성
+
+
+Q=queue.Queue(maxsize=20) #큐 객체 생성
+
+for v in range(1,10):
+    Q.put(v) #queue 모듈의 큐 클래스 이름은 Queue이다. 다음과 같이 새로운 큐 Q를 만들 수 있다.
+    #생성될 큐의 최대 크기를 키워드 인수 maxsize를 통해 지정할 수 있다.
+    #maxsize가 0인 것은 큐의 크기가 무한대라는 것이다.
+
+print("큐의 내용: ",end='')
+
+for _ in range(1,10):
+    print(Q.get(),end=' ')
+
+print()
+
+#get/put함수는 언더플로 오버플로가 발생하더라도 무한루프에 빠진다. 연산하기전에 empty(),full()를 이용해서 큐의 상태를 먼저 확인하라

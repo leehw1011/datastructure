@@ -1,0 +1,198 @@
+1. 용어를 헷갈리지 말자
+인스턴스는 객체와 같은 말이다. 
+클래스형 변수를 선언한다.
+즉 클래스를 사용하기 위한 변수 이것이 바로 객체고 인스턴스다. 
+헷갈리지말자!
+
+2. 클래스를 사용할때 멤버함수를 클래스 안에서 선언할 수도 있지만 
+길면? 밖에서 선언하자
+
+3. private과 protected의 차이를 알아보자!
+private은 접근제한자중 가장 쎈거. 해당 클래스 멤버함수에서는 접근할 수 있지만 상속된 함수는 절대로 접근할 수 없다.
+다만 protected로 하면 상속된 함수는 접근할 수 있다. 
+
+4. 어제 배운 내용과 이 내용을 포함해서 파워레인저 한번 만들어보자!
+
+파워레인저 만들기
+//내가 파워레인저덕후가 아니라 그냥 이거 시험문제였다.
+
+class Power {
+protected:
+   int color;
+   int gunnum;
+   
+public:
+   Power();
+   void chan(int c);
+   void attack(int c);
+};
+
+class Robot:public Power{
+private:
+   int num[3] = {1,2,3};
+public:
+   Robot();
+    void mobilze();
+   void attack(int c);
+
+};
+
+Power::Power() {
+   color = 0;
+   gunnum = 0;
+   cout << "파워레인저 3명이 출동했습니다." << endl;
+}
+void Power::chan(int c) {
+   color = c;
+   if (c == 1) {
+      cout << "레드 변신!" << endl;
+   }
+   else if (c == 2) {
+      cout << "블루 변신!" << endl;
+
+   }
+   else if (c == 3) {
+      cout << "핑크 변신!" << endl;
+   }
+   else
+      cout << "다시 입력하세요." << endl;
+}
+void Power::attack(int c) {
+   color = c;
+   if (c == 1) {
+      cout << "레드가 칼을 빼들었다." << endl;
+   }
+   else if (c == 2) {
+      cout << "블루가 방패를 빼들었다." << endl;
+
+   }
+   else if (c == 3) {
+      cout << "핑크가 창을 빼들었다." << endl;
+   }
+   else
+      cout << "다시 입력하세요." << endl;
+}
+
+Robot::Robot() {
+   cout << "로봇이 출동했습니다." << endl;
+}
+
+void Robot::mobilze() {
+   
+   for (int i = 0; i < 3; i++) {
+      if (num[i] == i+1) {
+         cout << "파워레인저 슈퍼로봇이 " << i+1 << "대 출동했습니다" << endl;
+      }
+   }
+}
+
+void Robot::attack(int c) {
+   color = c;
+   if (c == 1) {
+      cout << "레드로봇이 칼을 빼들었다." << endl;
+   }
+   else if (c == 2) {
+      cout << "블루로봇이 방패를 빼들었다." << endl;
+
+   }
+   else if (c == 3) {
+      cout << "핑크로봇이 창을 빼들었다." << endl;
+   }
+   else
+      cout << "다시 입력하세요." << endl;
+}
+
+int main(){
+   Power p;
+
+   for (int i = 0; i < 3; i++) {
+      p.chan(i+1);
+   }
+   cout << "공격해야겠다!" << endl;
+   for (int j = 0; j < 3; j++) {
+      p.attack(j+1);
+   }
+   cout << "이겼다" << endl;
+   cout << "아니 저 괴물이 커졌다!" << endl;
+
+   Robot r;
+
+   r.mobilze();
+   for (int u = 0; u < 3; u++) {
+      r.attack(u+1);
+   }
+
+   cout << "이겼습니다." << endl;
+}
+
+
+
+오늘은 입출력에 대한 기본 개념과 배열을 심화해서 사용해봅시다!
+
+배열은 문자열을 사용할 수 있다. 
+문자열을 사용하는 방법은 두가지 입니다.
+자 보세요!
+
+#include <iostream>
+#include <vector>
+#include <string> //스트링은 문자열을 받을 수 있다. 
+using namespace std;
+
+//입력과 출력의 개념은 stream의 개념에서 시작한다. 
+//다양한 장비에 대한 입출력을 일관된 방법으로 처리할 수 있다. 이 개념을 도입한게 stream
+//cin:istream
+//cout:ostream 그래서 iostream
+
+int main() {
+   char a[100]; //문자열을 선언. 이건 대신에 100이라는 공간을 할당해야 사용할 수 있다.
+   cin >> a;  //a라는 문자열을 입력한다.
+   string b; //문자열을 string을 include 사용해서 사용할 수 있다.
+   cin >> b; //b라는 문자열을 입력한다.
+   cout <<"1. 입력하세요."<< a << endl; //이건 출력
+   cout <<"2. 입력하세요."<< b << endl; //이건 출력
+}
+
+
+
+//오늘은 3번문제를 풀어볼게요!
+//생성자를 선언하고도 너무 귀찮은 경우 써봅시다
+
+class Car {
+private:
+   int num;
+   double gas;
+public:
+   Car();
+   Car(int n, double g);
+};
+
+class RacingCar :public Car {
+private:
+   int course;
+public:
+   RacingCar(int n, double g, int c);
+
+};
+
+Car::Car() {
+   num = 0;
+   gas = 0.0;
+
+}
+
+Car::Car(int n, double g) {
+   num = n;
+   gas = g;
+   cout << "차량번호는 " << num << endl;
+   cout << "가스량은 " << gas << endl;
+}
+
+RacingCar::RacingCar(int n, double g, int c): Car(n, g) { //여기서 Car(n,g) 생성자를 바로 불러와서 코드단축
+   course = c;
+   cout << "코스번호는 " << course << endl; //이것만 써도 자동으로 불러온다. 
+}
+
+int main() {
+   RacingCar(1435,30.5,5); //Car, RacingCar생성자 모두 불러온다. 
+   return 0;
+}

@@ -1,0 +1,4 @@
+﻿  스스로 구현해보는 스택.cpp
+C:\Users\82109\Desktop\자료구조\stack_1\stack_1\스스로 구현해보는 스택.cpp(48): warning C4715: 'Stack::pop': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\82109\Desktop\자료구조\stack_1\stack_1\스스로 구현해보는 스택.cpp(56): warning C4715: 'Stack::peek': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  stack_1.vcxproj -> C:\Users\82109\Desktop\자료구조\stack_1\Debug\stack_1.exe

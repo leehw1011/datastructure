@@ -1,0 +1,4 @@
+﻿  스스로 만드는 큐.cpp
+C:\Users\82109\Desktop\자료구조\queue_1\queue_1\스스로 만드는 큐.cpp(65): warning C4715: 'C_Deque::deleteRear': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\82109\Desktop\자료구조\queue_1\queue_1\스스로 만드는 큐.cpp(32): warning C4715: 'C_Queue::dequeue': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  queue_1.vcxproj -> C:\Users\82109\Desktop\자료구조\queue_1\Debug\queue_1.exe
